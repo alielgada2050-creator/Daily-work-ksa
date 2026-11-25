@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F1F1C">
+<title>وصلة عمل — التوظيف وتوريد الكوادر</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<!-- [UI-SHELL] -->
+<header class="top">
+  <div class="brand">
+    <div class="logo-slot" aria-label="مكان الشعار">الشعار</div>
+    <div><strong>وصلة عمل</strong><small>توظيف وتوريد كوادر بشفافية</small></div>
+  </div>
+  <form class="search" id="search-form" role="search">
+    <label for="q" class="sr">ابحث في الوظائف</label>
+    <input id="q" name="q" placeholder="ابحث عن وظيفة، مهنة، مدينة…" autocomplete="off">
+  </form>
+  <div class="top-actions">
+    <div class="notif-slot" aria-label="مكان الإشعارات — يُضاف لاحقًا"></div>
+    <span id="who" class="who"></span>
+    <button class="ghost" data-action="logout" id="logout-btn" hidden>خروج</button>
+  </div>
+</header>
+<div class="layout">
+  <nav id="nav" aria-label="الأقسام"></nav>
+  <main id="main" tabindex="-1"></main>
+</div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+<dialog id="ask">
+  <form method="dialog" id="ask-form">
+    <label for="ask-input" id="ask-label">السبب</label>
+    <input id="ask-input" required>
+    <div class="row end"><button value="cancel" class="ghost" formnovalidate>إلغاء</button><button value="ok" class="btn">تأكيد</button></div>
+  </form>
+</dialog>
+<script src="/app.js"></script>
+</body>
+</html>

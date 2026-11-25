@@ -1,0 +1,1229 @@
+{
+  "project": "وصلة عمل",
+  "version": 2,
+  "nodes": [
+    {
+      "id": "UI-SHELL",
+      "type": "screen",
+      "name": "الهيكل والتنقل",
+      "summary": "رأس الصفحة، مكان الشعار والإشعارات، التنقل حسب الدور",
+      "location": "public/index.html, public/app.js#navItems",
+      "labels": []
+    },
+    {
+      "id": "UI-HOME",
+      "type": "screen",
+      "name": "الوظائف والطلبات العامة",
+      "summary": "تصفح عام وبحث مفهرس مع ترقيم",
+      "location": "public/app.js#VIEWS.home",
+      "labels": []
+    },
+    {
+      "id": "UI-LOGIN",
+      "type": "screen",
+      "name": "الدخول",
+      "summary": "OTP جوال/بريد + حسابات تجريبية",
+      "location": "public/app.js#VIEWS.login",
+      "labels": []
+    },
+    {
+      "id": "UI-COMPANY-ORDER",
+      "type": "screen",
+      "name": "لوحة الطلب",
+      "summary": "المؤشرات، القوائم، الإجراءات حسب الدور، التصدير",
+      "location": "public/app.js#VIEWS.orders",
+      "labels": []
+    },
+    {
+      "id": "UI-SUPPLIER-PORTAL",
+      "type": "screen",
+      "name": "رفع الدفعات للمورد",
+      "summary": "رفع، تقدم، إعادة المحاولة",
+      "location": "public/app.js#uploadCard",
+      "labels": []
+    },
+    {
+      "id": "UI-SEEKER-PROFILE",
+      "type": "screen",
+      "name": "ملف الباحث",
+      "summary": "مراجعة الحقول، الوثائق، الموافقات، الترشيحات",
+      "location": "public/app.js#VIEWS.me",
+      "labels": []
+    },
+    {
+      "id": "UI-MESSAGES",
+      "type": "screen",
+      "name": "التواصل",
+      "summary": "القنوات، القوالب، المعاينة، الإرسال الجماعي",
+      "location": "public/app.js#VIEWS.messages",
+      "labels": []
+    },
+    {
+      "id": "UI-ADMIN",
+      "type": "screen",
+      "name": "إدارة المنصة",
+      "summary": "تحقق المنشآت، التكرار، البلاغات، سجل التدقيق",
+      "location": "public/app.js#VIEWS.admin",
+      "labels": []
+    },
+    {
+      "id": "UI-SUPPORT",
+      "type": "screen",
+      "name": "الدعم الفني",
+      "summary": "بيانات قابلة للتعديل ونموذج بلاغ",
+      "location": "public/app.js#VIEWS.support",
+      "labels": []
+    },
+    {
+      "id": "UI-SETTINGS",
+      "type": "screen",
+      "name": "الإعدادات والأسواق",
+      "summary": "إعدادات كل بلد وحالة الخدمات",
+      "location": "public/app.js#VIEWS.settings",
+      "labels": []
+    },
+    {
+      "id": "UI-PWA",
+      "type": "component",
+      "name": "تطبيق قابل للتثبيت",
+      "summary": "manifest + service worker لا يخزن بيانات API",
+      "location": "public/sw.js, public/manifest.webmanifest",
+      "labels": []
+    },
+    {
+      "id": "MOD-APP",
+      "type": "module",
+      "name": "تطبيق Express",
+      "summary": "رؤوس الأمان، حدود الطلبات، تركيب الوحدات",
+      "location": "src/app.js",
+      "labels": []
+    },
+    {
+      "id": "MOD-CONFIG",
+      "type": "module",
+      "name": "الإعدادات",
+      "summary": "كل الأسرار والمزودين من متغيرات البيئة",
+      "location": "src/config.js",
+      "labels": []
+    },
+    {
+      "id": "MOD-DB",
+      "type": "module",
+      "name": "قاعدة البيانات",
+      "summary": "PostgreSQL أو pg-mem للتجربة + الهجرات",
+      "location": "src/db/index.js",
+      "labels": []
+    },
+    {
+      "id": "MOD-AUTH",
+      "type": "module",
+      "name": "الحسابات والجلسات",
+      "summary": "جلسات httpOnly، OTP، دخول تجريبي",
+      "location": "src/modules/auth.js",
+      "labels": []
+    },
+    {
+      "id": "MOD-ORGS",
+      "type": "module",
+      "name": "الصلاحيات والعزل",
+      "summary": "صلاحيات المؤسسة والطلب والسجل على الخادم",
+      "location": "src/lib/core.js#assertOrder",
+      "labels": []
+    },
+    {
+      "id": "MOD-ORDERS",
+      "type": "module",
+      "name": "الطلبات والإسناد",
+      "summary": "إنشاء، اعتماد، إسناد، لوحة الوظائف",
+      "location": "src/modules/orders.js",
+      "labels": []
+    },
+    {
+      "id": "MOD-NOMINATIONS",
+      "type": "module",
+      "name": "الترشيح والمطابقة",
+      "summary": "المطابقة، الاعتماد، الاستبدال، منع التكرار",
+      "location": "src/modules/orders.js, src/lib/core.js#match",
+      "labels": []
+    },
+    {
+      "id": "MOD-DOCS",
+      "type": "module",
+      "name": "الوثائق",
+      "summary": "تخزين خاص، روابط مؤقتة، صلاحية منفصلة، مهام المراجعة",
+      "location": "src/modules/candidates.js",
+      "labels": []
+    },
+    {
+      "id": "MOD-CV-PARSE",
+      "type": "module",
+      "name": "تحليل السير",
+      "summary": "طابور خلفي، استخراج، OCR، تكرار الاستيراد",
+      "location": "src/modules/candidates.js#processJob",
+      "labels": []
+    },
+    {
+      "id": "MOD-MESSAGING",
+      "type": "module",
+      "name": "الرسائل",
+      "summary": "قوالب، مستلمون بالموافقة، مفتاح منع التكرار",
+      "location": "src/modules/orders.js#TEMPLATES",
+      "labels": []
+    },
+    {
+      "id": "MOD-WEBHOOKS",
+      "type": "module",
+      "name": "استقبال حالات المزودين",
+      "summary": "Webhook واتساب موقّع، لا يخفض الحالة",
+      "location": "src/modules/webhooks.js",
+      "labels": []
+    },
+    {
+      "id": "MOD-REPORTS",
+      "type": "module",
+      "name": "التصدير",
+      "summary": "XLSX بعناوين عربية/إنجليزية ومنع حقن الصيغ",
+      "location": "src/modules/orders.js#export.xlsx",
+      "labels": []
+    },
+    {
+      "id": "MOD-AUDIT",
+      "type": "module",
+      "name": "سجل التدقيق",
+      "summary": "العرض الحساس والتعديل والاعتماد والمشاركة والتصدير",
+      "location": "src/lib/core.js#audit",
+      "labels": []
+    },
+    {
+      "id": "MOD-MARKETS",
+      "type": "module",
+      "name": "الأسواق والإدارة",
+      "summary": "إعدادات البلد، التحقق، الدعم",
+      "location": "src/modules/admin.js",
+      "labels": []
+    },
+    {
+      "id": "DATA-MARKET",
+      "type": "data",
+      "name": "market",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-ORG",
+      "type": "data",
+      "name": "org",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-USER",
+      "type": "data",
+      "name": "user",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-MEMBERSHIP",
+      "type": "data",
+      "name": "membership",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-SESSION",
+      "type": "data",
+      "name": "session",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-CANDIDATE",
+      "type": "data",
+      "name": "candidate",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-CV-FIELD",
+      "type": "data",
+      "name": "cv-field",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-DOCUMENT",
+      "type": "data",
+      "name": "document",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-REVIEW-TASK",
+      "type": "data",
+      "name": "review-task",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-CONSENT",
+      "type": "data",
+      "name": "consent",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-ORDER",
+      "type": "data",
+      "name": "order",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-NOMINATION",
+      "type": "data",
+      "name": "nomination",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-CV-JOB",
+      "type": "data",
+      "name": "cv-job",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-MESSAGE",
+      "type": "data",
+      "name": "message",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-MESSAGE-DELIVERY",
+      "type": "data",
+      "name": "message-delivery",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-TICKET",
+      "type": "data",
+      "name": "ticket",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "DATA-AUDIT-LOG",
+      "type": "data",
+      "name": "audit-log",
+      "summary": "جدول في المخطط",
+      "location": "src/db/migrations/001_init.sql",
+      "labels": []
+    },
+    {
+      "id": "EXT-OTP",
+      "type": "external",
+      "name": "مزود التحقق",
+      "summary": "mock ← Twilio Verify/Unifonic",
+      "location": "src/providers/index.js#otp",
+      "labels": []
+    },
+    {
+      "id": "EXT-STORAGE",
+      "type": "external",
+      "name": "التخزين الخاص",
+      "summary": "local ← S3/R2",
+      "location": "src/providers/index.js#storage",
+      "labels": []
+    },
+    {
+      "id": "EXT-AI-OCR",
+      "type": "external",
+      "name": "الاستخراج بالذكاء الاصطناعي و OCR",
+      "summary": "heuristic ← FreeLLMAPI/OpenAI-compatible؛ tesseract",
+      "location": "src/providers/ai.js",
+      "labels": []
+    },
+    {
+      "id": "EXT-WHATSAPP",
+      "type": "external",
+      "name": "واتساب الأعمال",
+      "summary": "WhatsApp Cloud API بقوالب معتمدة؛ mock + رابط يدوي عند عدم الربط",
+      "location": "src/providers/whatsapp.js",
+      "labels": []
+    },
+    {
+      "id": "EXT-SMS",
+      "type": "external",
+      "name": "SMS",
+      "summary": "mock ← مزود محلي",
+      "location": "src/providers/index.js#sendBatch",
+      "labels": []
+    },
+    {
+      "id": "EXT-EMAIL",
+      "type": "external",
+      "name": "البريد",
+      "summary": "mock ← SMTP / Gmail OAuth",
+      "location": "src/providers/index.js#sendBatch",
+      "labels": []
+    },
+    {
+      "id": "EXT-TELEGRAM",
+      "type": "external",
+      "name": "تيليجرام",
+      "summary": "mock ← Bot API",
+      "location": "src/providers/index.js#sendBatch",
+      "labels": []
+    },
+    {
+      "id": "EXT-GITHUB",
+      "type": "external",
+      "name": "GitHub والنشر",
+      "summary": "CI بقاعدة PostgreSQL",
+      "location": ".github/workflows/ci.yml",
+      "labels": []
+    },
+    {
+      "id": "RULE-GAP",
+      "type": "rule",
+      "name": "العجز = المطلوب − المؤهل",
+      "summary": "",
+      "location": "src/lib/core.js#orderKpis",
+      "labels": []
+    },
+    {
+      "id": "RULE-NO-DUP-NOMINATION",
+      "type": "rule",
+      "name": "منع تكرار الترشيح",
+      "summary": "UNIQUE(order_id, candidate_id) + فحص",
+      "location": "src/modules/orders.js#nominate",
+      "labels": []
+    },
+    {
+      "id": "RULE-CONSENT-BEFORE-SHARE",
+      "type": "rule",
+      "name": "لا مشاركة بلا موافقة",
+      "summary": "الاسم/الجوال والرسائل حسب الموافقة",
+      "location": "src/modules/orders.js#present",
+      "labels": []
+    },
+    {
+      "id": "RULE-EXPORT-DEFAULT-COLUMNS",
+      "type": "rule",
+      "name": "أعمدة التصدير الافتراضية",
+      "summary": "بلا هوية/إقامة؛ الاتصال بإذن",
+      "location": "src/modules/orders.js#DEFAULT_COLS",
+      "labels": []
+    },
+    {
+      "id": "RULE-AGE-EXCLUDED",
+      "type": "rule",
+      "name": "العمر خارج الترتيب والتصدير",
+      "summary": "يُستخرج فقط من تاريخ ميلاد صريح",
+      "location": "src/lib/core.js#match",
+      "labels": []
+    },
+    {
+      "id": "RULE-CV-IS-DATA",
+      "type": "rule",
+      "name": "محتوى السيرة بيانات",
+      "summary": "تسوير النص وعدم تنفيذ تعليماته",
+      "location": "src/providers/ai.js",
+      "labels": []
+    },
+    {
+      "id": "ROLE-SEEKER",
+      "type": "role",
+      "name": "باحث",
+      "summary": "",
+      "location": "users.kind",
+      "labels": []
+    },
+    {
+      "id": "ROLE-CREATOR",
+      "type": "role",
+      "name": "منشئ الطلب",
+      "summary": "",
+      "location": "memberships.role",
+      "labels": []
+    },
+    {
+      "id": "ROLE-TECH",
+      "type": "role",
+      "name": "مراجع فني",
+      "summary": "",
+      "location": "memberships.role",
+      "labels": []
+    },
+    {
+      "id": "ROLE-APPROVER",
+      "type": "role",
+      "name": "معتمد نهائي",
+      "summary": "",
+      "location": "memberships.role",
+      "labels": []
+    },
+    {
+      "id": "ROLE-SINGLE-ADMIN",
+      "type": "role",
+      "name": "مسؤول منشأة صغيرة",
+      "summary": "",
+      "location": "memberships.role",
+      "labels": []
+    },
+    {
+      "id": "ROLE-SUPPLIER",
+      "type": "role",
+      "name": "مسؤول المورد",
+      "summary": "",
+      "location": "memberships.role",
+      "labels": []
+    },
+    {
+      "id": "ROLE-DOC-REVIEWER",
+      "type": "role",
+      "name": "مراجع الوثائق",
+      "summary": "",
+      "location": "memberships.role",
+      "labels": []
+    },
+    {
+      "id": "ROLE-PLATFORM-ADMIN",
+      "type": "role",
+      "name": "إدارة المنصة",
+      "summary": "",
+      "location": "users.kind",
+      "labels": []
+    },
+    {
+      "id": "ADR-001",
+      "type": "decision",
+      "name": "تطبيق وحدوي Express + PostgreSQL",
+      "summary": "أبسط تشغيل ونشر؛ الوحدات منفصلة منطقيًا وجاهزة للفصل لاحقًا. مرفوض الآن: خدمات مصغّرة",
+      "location": "architecture/ARCHITECTURE.md",
+      "labels": []
+    },
+    {
+      "id": "ADR-002",
+      "type": "decision",
+      "name": "pg-mem للتجربة",
+      "summary": "نفس SQL بلا خادم قاعدة. مرفوض: SQLite (اختلاف SQL)",
+      "location": "src/db/index.js",
+      "labels": []
+    },
+    {
+      "id": "ADR-003",
+      "type": "decision",
+      "name": "واجهة Vanilla JS بلا بناء",
+      "summary": "CSP صارم، لا اعتماديات للواجهة. يمكن الترحيل لـ Next.js لاحقًا",
+      "location": "public/",
+      "labels": []
+    },
+    {
+      "id": "ADR-004",
+      "type": "decision",
+      "name": "مزود AI متوافق مع OpenAI (FreeLLMAPI)",
+      "summary": "تبديل بلا تغيير كود؛ احتياط heuristic محلي",
+      "location": "src/providers/ai.js",
+      "labels": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "UI-SHELL",
+      "target": "MOD-AUTH",
+      "type": "CALLS",
+      "fact": "الهيكل يقرأ المستخدم الحالي",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-HOME",
+      "target": "MOD-ORDERS",
+      "type": "CALLS",
+      "fact": "لوحة الوظائف العامة",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-LOGIN",
+      "target": "MOD-AUTH",
+      "type": "CALLS",
+      "fact": "OTP والدخول التجريبي",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-COMPANY-ORDER",
+      "target": "MOD-ORDERS",
+      "type": "CALLS",
+      "fact": "تفاصيل الطلب والمؤشرات",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-COMPANY-ORDER",
+      "target": "MOD-NOMINATIONS",
+      "type": "CALLS",
+      "fact": "القائمة والإجراءات",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-COMPANY-ORDER",
+      "target": "MOD-REPORTS",
+      "type": "CALLS",
+      "fact": "التصدير",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-SUPPLIER-PORTAL",
+      "target": "MOD-CV-PARSE",
+      "type": "CALLS",
+      "fact": "رفع الدفعات والتقدم",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-SEEKER-PROFILE",
+      "target": "MOD-DOCS",
+      "type": "CALLS",
+      "fact": "الوثائق والموافقات والحقول",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-MESSAGES",
+      "target": "MOD-MESSAGING",
+      "type": "CALLS",
+      "fact": "المعاينة والإرسال",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-ADMIN",
+      "target": "MOD-MARKETS",
+      "type": "CALLS",
+      "fact": "الإدارة",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-ADMIN",
+      "target": "DATA-AUDIT-LOG",
+      "type": "READS",
+      "fact": "عرض السجل",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-SUPPORT",
+      "target": "MOD-MARKETS",
+      "type": "CALLS",
+      "fact": "بيانات الدعم والبلاغات",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-SETTINGS",
+      "target": "MOD-MARKETS",
+      "type": "CALLS",
+      "fact": "الأسواق وحالة المزودين",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-ORDERS",
+      "target": "MOD-ORGS",
+      "type": "DEPENDS_ON",
+      "fact": "كل قراءة/تعديل تمر بالصلاحيات",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-NOMINATIONS",
+      "target": "MOD-ORGS",
+      "type": "DEPENDS_ON",
+      "fact": "الاعتماد حسب الدور",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-REPORTS",
+      "target": "MOD-ORGS",
+      "type": "DEPENDS_ON",
+      "fact": "تصدير الاتصال بإذن",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MESSAGING",
+      "target": "MOD-ORGS",
+      "type": "DEPENDS_ON",
+      "fact": "المراسلة للمخوّل",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-DOCS",
+      "target": "MOD-ORGS",
+      "type": "DEPENDS_ON",
+      "fact": "صلاحية الوثائق منفصلة",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-ORDERS",
+      "target": "DATA-ORDER",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-NOMINATIONS",
+      "target": "DATA-NOMINATION",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-NOMINATIONS",
+      "target": "DATA-CONSENT",
+      "type": "READS",
+      "fact": "إخفاء الهوية بلا موافقة",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-CV-PARSE",
+      "target": "DATA-CV-JOB",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-CV-PARSE",
+      "target": "DATA-CANDIDATE",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-CV-PARSE",
+      "target": "DATA-CV-FIELD",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-CV-PARSE",
+      "target": "MOD-NOMINATIONS",
+      "type": "CALLS",
+      "fact": "ترشيح تلقائي بعد الاستخراج",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-CV-PARSE",
+      "target": "EXT-AI-OCR",
+      "type": "USES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-DOCS",
+      "target": "EXT-STORAGE",
+      "type": "USES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-DOCS",
+      "target": "DATA-DOCUMENT",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-DOCS",
+      "target": "DATA-REVIEW-TASK",
+      "type": "WRITES",
+      "fact": "وثيقة منتهية",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-DOCS",
+      "target": "DATA-CONSENT",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-AUTH",
+      "target": "EXT-OTP",
+      "type": "USES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-AUTH",
+      "target": "DATA-SESSION",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-AUTH",
+      "target": "DATA-MEMBERSHIP",
+      "type": "READS",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MESSAGING",
+      "target": "EXT-WHATSAPP",
+      "type": "USES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MESSAGING",
+      "target": "EXT-SMS",
+      "type": "USES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MESSAGING",
+      "target": "EXT-EMAIL",
+      "type": "USES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MESSAGING",
+      "target": "EXT-TELEGRAM",
+      "type": "USES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MESSAGING",
+      "target": "DATA-MESSAGE",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MARKETS",
+      "target": "DATA-MARKET",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MARKETS",
+      "target": "DATA-ORG",
+      "type": "WRITES",
+      "fact": "التحقق اليدوي",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MARKETS",
+      "target": "DATA-TICKET",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-ORDERS",
+      "target": "MOD-AUDIT",
+      "type": "CALLS",
+      "fact": "يسجل الإجراء",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-NOMINATIONS",
+      "target": "MOD-AUDIT",
+      "type": "CALLS",
+      "fact": "يسجل الإجراء",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-DOCS",
+      "target": "MOD-AUDIT",
+      "type": "CALLS",
+      "fact": "يسجل الإجراء",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-REPORTS",
+      "target": "MOD-AUDIT",
+      "type": "CALLS",
+      "fact": "يسجل الإجراء",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MESSAGING",
+      "target": "MOD-AUDIT",
+      "type": "CALLS",
+      "fact": "يسجل الإجراء",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-AUTH",
+      "target": "MOD-AUDIT",
+      "type": "CALLS",
+      "fact": "يسجل الإجراء",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MARKETS",
+      "target": "MOD-AUDIT",
+      "type": "CALLS",
+      "fact": "يسجل الإجراء",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-CV-PARSE",
+      "target": "MOD-AUDIT",
+      "type": "CALLS",
+      "fact": "يسجل الإجراء",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-AUDIT",
+      "target": "DATA-AUDIT-LOG",
+      "type": "WRITES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-APP",
+      "target": "MOD-CONFIG",
+      "type": "DEPENDS_ON",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-DB",
+      "target": "MOD-CONFIG",
+      "type": "DEPENDS_ON",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-NOMINATIONS",
+      "target": "RULE-NO-DUP-NOMINATION",
+      "type": "ENFORCES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-NOMINATIONS",
+      "target": "RULE-AGE-EXCLUDED",
+      "type": "ENFORCES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-ORDERS",
+      "target": "RULE-GAP",
+      "type": "ENFORCES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-NOMINATIONS",
+      "target": "RULE-CONSENT-BEFORE-SHARE",
+      "type": "ENFORCES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MESSAGING",
+      "target": "RULE-CONSENT-BEFORE-SHARE",
+      "type": "ENFORCES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-REPORTS",
+      "target": "RULE-EXPORT-DEFAULT-COLUMNS",
+      "type": "ENFORCES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "EXT-AI-OCR",
+      "target": "RULE-CV-IS-DATA",
+      "type": "ENFORCES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-SEEKER-PROFILE",
+      "target": "ROLE-SEEKER",
+      "type": "ALLOWED_FOR",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-SUPPLIER-PORTAL",
+      "target": "ROLE-SUPPLIER",
+      "type": "ALLOWED_FOR",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-ADMIN",
+      "target": "ROLE-PLATFORM-ADMIN",
+      "type": "ALLOWED_FOR",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-COMPANY-ORDER",
+      "target": "ROLE-CREATOR",
+      "type": "ALLOWED_FOR",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-COMPANY-ORDER",
+      "target": "ROLE-TECH",
+      "type": "ALLOWED_FOR",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-COMPANY-ORDER",
+      "target": "ROLE-APPROVER",
+      "type": "ALLOWED_FOR",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-COMPANY-ORDER",
+      "target": "ROLE-SINGLE-ADMIN",
+      "type": "ALLOWED_FOR",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "UI-COMPANY-ORDER",
+      "target": "ROLE-SUPPLIER",
+      "type": "ALLOWED_FOR",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-DOCS",
+      "target": "ROLE-DOC-REVIEWER",
+      "type": "ALLOWED_FOR",
+      "fact": "عرض الوثائق",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "EXT-GITHUB",
+      "target": "MOD-DB",
+      "type": "DEPENDS_ON",
+      "fact": "CI يشغل الاختبارات على PostgreSQL",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    },
+    {
+      "source": "MOD-MESSAGING",
+      "target": "DATA-MESSAGE-DELIVERY",
+      "type": "WRITES",
+      "fact": "حالة لكل مستلم",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-003"
+    },
+    {
+      "source": "EXT-WHATSAPP",
+      "target": "MOD-WEBHOOKS",
+      "type": "TRIGGERS",
+      "fact": "Meta ترسل الحالات",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-003"
+    },
+    {
+      "source": "MOD-WEBHOOKS",
+      "target": "DATA-MESSAGE-DELIVERY",
+      "type": "WRITES",
+      "fact": "أُرسل/تم التسليم/قُرئ/فشل",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-003"
+    },
+    {
+      "source": "UI-PWA",
+      "target": "UI-SHELL",
+      "type": "RENDERS",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-002"
+    }
+  ],
+  "episodes": [
+    {
+      "id": "EP-001",
+      "date": "2026-11-26",
+      "source": "طلب المستخدم (التصميم)",
+      "summary": "نموذج تصميم تفاعلي وخريطة أولية على لوحة Design"
+    },
+    {
+      "id": "EP-003",
+      "date": "2026-11-26",
+      "source": "طلب المستخدم: ربط أول قناة فعلية",
+      "summary": "تكامل WhatsApp Cloud API + Webhook موقّع + تتبع الحالة لكل مستلم"
+    },
+    {
+      "id": "EP-002",
+      "date": "2026-11-26",
+      "source": "طلب المستخدم: «اكمل»",
+      "summary": "بناء المستودع الفعلي: خادم، واجهة PWA، اختبارات قبول، مزود AI عبر FreeLLMAPI"
+    }
+  ]
+}
