@@ -48,7 +48,8 @@ async function processJob(id) {
   const buf = await storage.get(job.storage_key);
   let text = await extractText(buf, job.mime).catch(() => '');
   if (text.replace(/\s/g, '').length < 20) text = await ocr(buf); // scanned page; throws if OCR disabled
-  const { fields } = await extractFields(text);
+  const { fields, provider, attempts } = await extractFields(text);
+  await db.query('UPDATE cv_jobs SET ai_provider = $1, ai_attempts = $2 WHERE id = $3', [provider, JSON.stringify(attempts), id]);
   const phone = fields.phone && fields.phone.value;
   const email = fields.email && fields.email.value;
   // Duplicate detection on import: same phone or email already on file -> hold for review, never auto-merge.
@@ -92,7 +93,7 @@ router.post('/orders/:id/cv-batch', cvUpload.array('files', 200), wrap(async (re
 }));
 
 router.get('/cv-batches/:batchId', wrap(async (req, res) => {
-  const jobs = await db.query('SELECT id, order_id, supplier_org_id, filename, status, error, attempts, candidate_id, duplicate_of FROM cv_jobs WHERE batch_id = $1 ORDER BY id', [req.params.batchId]);
+  const jobs = await db.query('SELECT id, order_id, supplier_org_id, filename, status, error, attempts, candidate_id, duplicate_of, ai_provider FROM cv_jobs WHERE batch_id = $1 ORDER BY id', [req.params.batchId]);
   if (!jobs.length) throw new HttpError(404, 'الدفعة غير موجودة');
   if (!isAdmin(req.user) && rolesIn(req.user, jobs[0].supplier_org_id).size === 0) throw new HttpError(403, 'الدفعة تخص مؤسسة أخرى');
   const count = (s) => jobs.filter((j) => j.status === s).length;
@@ -198,10 +199,10 @@ router.post('/me/cv', cvUpload.single('file'), wrap(async (req, res) => {
   let text = await extractText(req.file.buffer, t.mime).catch(() => '');
   let warning;
   if (text.replace(/\s/g, '').length < 20) { try { text = await ocr(req.file.buffer); } catch (e) { warning = e.message; text = ''; } }
-  const { fields } = await extractFields(text);
-  await saveFields(c.id, fields);
-  await audit(req.user, 'cv_upload_self', 'candidate', c.id, {});
-  res.status(201).json({ ok: true, warning, fields: await db.query('SELECT * FROM cv_fields WHERE candidate_id = $1 ORDER BY id', [c.id]) });
+  const ai = await extractFields(text);
+  await saveFields(c.id, ai.fields);
+  await audit(req.user, 'cv_upload_self', 'candidate', c.id, { aiProvider: ai.provider, attempts: ai.attempts });
+  res.status(201).json({ ok: true, warning: warning || ai.warning, aiProvider: ai.provider, fields: await db.query('SELECT * FROM cv_fields WHERE candidate_id = $1 ORDER BY id', [c.id]) });
 }));
 
 router.patch('/me/fields/:fid', wrap(async (req, res) => {

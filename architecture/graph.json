@@ -357,8 +357,64 @@
     {
       "id": "EXT-AI-OCR",
       "type": "external",
-      "name": "الاستخراج بالذكاء الاصطناعي و OCR",
-      "summary": "heuristic ← FreeLLMAPI/OpenAI-compatible؛ tesseract",
+      "name": "OCR",
+      "summary": "tesseract اختياري",
+      "location": "src/providers/index.js#ocr",
+      "labels": []
+    },
+    {
+      "id": "MOD-AI-GATEWAY",
+      "type": "module",
+      "name": "بوابة الذكاء الاصطناعي",
+      "summary": "سلسلة مزودين مع تحويل تلقائي، إخفاء الاتصال، تحقق الرد",
+      "location": "src/providers/ai.js#extractFields",
+      "labels": []
+    },
+    {
+      "id": "EXT-CLAUDE",
+      "type": "external",
+      "name": "Claude (Anthropic API)",
+      "summary": "/v1/messages الرسمية",
+      "location": "src/providers/ai.js#anthropicMessages",
+      "labels": []
+    },
+    {
+      "id": "EXT-9ROUTER",
+      "type": "external",
+      "name": "9Router",
+      "summary": "بوابة OpenAI-compatible محلية",
+      "location": "src/providers/ai.js#PROVIDERS",
+      "labels": []
+    },
+    {
+      "id": "EXT-FREELLMAPI",
+      "type": "external",
+      "name": "FreeLLMAPI",
+      "summary": "موجّه الطبقات المجانية",
+      "location": "src/providers/ai.js#PROVIDERS",
+      "labels": []
+    },
+    {
+      "id": "EXT-FCC",
+      "type": "external",
+      "name": "free-claude-code proxy",
+      "summary": "وكيل محلي (AGPL)",
+      "location": "src/providers/ai.js#PROVIDERS",
+      "labels": []
+    },
+    {
+      "id": "RULE-REDACT-CONTACT",
+      "type": "rule",
+      "name": "إخفاء الجوال والبريد قبل الإرسال الخارجي",
+      "summary": "AI_REDACT_CONTACT",
+      "location": "src/providers/ai.js#redact",
+      "labels": []
+    },
+    {
+      "id": "ADR-005",
+      "type": "decision",
+      "name": "سلسلة مزودين مع احتياط محلي",
+      "summary": "لا تتوقف المعالجة عند نفاد الطبقات المجانية؛ Claude للدقة",
       "location": "src/providers/ai.js",
       "labels": []
     },
@@ -783,6 +839,69 @@
       "episode": "EP-002"
     },
     {
+      "source": "MOD-CV-PARSE",
+      "target": "MOD-AI-GATEWAY",
+      "type": "CALLS",
+      "fact": "استخراج الحقول",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-004"
+    },
+    {
+      "source": "MOD-AI-GATEWAY",
+      "target": "EXT-CLAUDE",
+      "type": "USES",
+      "fact": "بالترتيب في AI_CHAIN",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-004"
+    },
+    {
+      "source": "MOD-AI-GATEWAY",
+      "target": "EXT-9ROUTER",
+      "type": "USES",
+      "fact": "بالترتيب في AI_CHAIN",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-004"
+    },
+    {
+      "source": "MOD-AI-GATEWAY",
+      "target": "EXT-FREELLMAPI",
+      "type": "USES",
+      "fact": "بالترتيب في AI_CHAIN",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-004"
+    },
+    {
+      "source": "MOD-AI-GATEWAY",
+      "target": "EXT-FCC",
+      "type": "USES",
+      "fact": "بالترتيب في AI_CHAIN",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-004"
+    },
+    {
+      "source": "MOD-AI-GATEWAY",
+      "target": "RULE-REDACT-CONTACT",
+      "type": "ENFORCES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-004"
+    },
+    {
+      "source": "MOD-AI-GATEWAY",
+      "target": "RULE-CV-IS-DATA",
+      "type": "ENFORCES",
+      "fact": "",
+      "valid_at": "2026-11-26",
+      "invalid_at": null,
+      "episode": "EP-004"
+    },
+    {
       "source": "MOD-DOCS",
       "target": "EXT-STORAGE",
       "type": "USES",
@@ -1074,9 +1193,9 @@
       "source": "EXT-AI-OCR",
       "target": "RULE-CV-IS-DATA",
       "type": "ENFORCES",
-      "fact": "",
+      "fact": "انتقلت القاعدة إلى MOD-AI-GATEWAY",
       "valid_at": "2026-11-26",
-      "invalid_at": null,
+      "invalid_at": "2026-11-26",
       "episode": "EP-002"
     },
     {
@@ -1212,6 +1331,12 @@
       "date": "2026-11-26",
       "source": "طلب المستخدم (التصميم)",
       "summary": "نموذج تصميم تفاعلي وخريطة أولية على لوحة Design"
+    },
+    {
+      "id": "EP-004",
+      "date": "2026-11-26",
+      "source": "طلب المستخدم: 9Router + FCC + FreeLLMAPI مع دعم Claude",
+      "summary": "بوابة ذكاء اصطناعي متعددة المزودين مع تحويل تلقائي وإخفاء بيانات الاتصال"
     },
     {
       "id": "EP-003",

@@ -17,9 +17,11 @@ router.get('/support/info', wrap(async (_req, res) => {
 }));
 router.get('/markets', wrap(async (_req, res) => {
   const rows = await db.query('SELECT code, name, config FROM markets ORDER BY code');
-  res.json({ items: rows.map((r) => ({ code: r.code, name: r.name, config: JSON.parse(r.config) })) });
+  const items = rows.map((r) => ({ code: r.code, name: r.name, config: JSON.parse(r.config) }));
+  items.sort((a, b) => Number(!!b.config.launched) - Number(!!a.config.launched));
+  res.json({ items });
 }));
-router.get('/providers', (_req, res) => res.json({ providers: config.providers, demoMode: config.demoMode }));
+router.get('/providers', (_req, res) => res.json({ providers: config.providers, ai: require('../providers/ai').status(), redactContact: config.ai.redactContact, demoMode: config.demoMode }));
 
 router.use(['/support/tickets', '/admin'], requireUser);
 
@@ -54,6 +56,14 @@ router.get('/admin/duplicates', wrap(async (_req, res) => {
   for (const r of rows) (groups[r.phone] = groups[r.phone] || []).push(r);
   const jobs = await db.query("SELECT j.id, j.filename, j.duplicate_of, c.code FROM cv_jobs j JOIN candidates c ON c.id = j.duplicate_of WHERE j.status = 'duplicate'");
   res.json({ samePhone: Object.values(groups).filter((g) => g.length > 1), importHeld: jobs });
+}));
+
+// Runs a synthetic (fake) CV through the AI chain and reports which provider answered and how long each took.
+router.post('/admin/ai/test', wrap(async (req, res) => {
+  const sample = 'Name: Test Candidate\nMobile: 0550000000\nProfession: Electrician - maintenance\nSkills: panels, wiring\nCertificates: Safety\n6 years experience in Riyadh';
+  const r = await require('../providers/ai').extractFields(sample);
+  await audit(req.user, 'ai_chain_test', 'settings', 'ai', { provider: r.provider, attempts: r.attempts });
+  res.json({ provider: r.provider, attempts: r.attempts, sample: { profession: r.fields.profession.value, experience: r.fields.experience_years.value } });
 }));
 
 router.get('/admin/tickets', wrap(async (_req, res) => res.json({ items: await db.query('SELECT * FROM support_tickets ORDER BY id DESC') })));

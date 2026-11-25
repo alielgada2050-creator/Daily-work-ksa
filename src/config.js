@@ -18,7 +18,6 @@ module.exports = {
   providers: {
     otp: env.OTP_PROVIDER || 'mock',             // mock | twilio_verify
     storage: env.STORAGE_PROVIDER || 'local',    // local | s3 (to implement)
-    ai: env.AI_PROVIDER || 'heuristic',          // heuristic | openai_compatible (FreeLLMAPI, OpenAI, ...)
     ocr: env.OCR_PROVIDER || 'none',             // none | tesseract
     whatsapp: env.WHATSAPP_PROVIDER || 'mock',   // mock | cloud_api
     sms: env.SMS_PROVIDER || 'mock',
@@ -26,9 +25,15 @@ module.exports = {
     telegram: env.TELEGRAM_PROVIDER || 'mock',
   },
   ai: {
-    baseUrl: env.AI_BASE_URL || 'http://localhost:3001/v1', // FreeLLMAPI default
-    apiKey: env.AI_API_KEY || '',
-    model: env.AI_MODEL || 'auto',
+    // Ordered provider chain; the local extractor is always the final fallback.
+    chain: (env.AI_CHAIN || (env.AI_PROVIDER === 'openai_compatible' ? 'openai_compatible' : '')).split(',').map((x) => x.trim()).filter(Boolean),
+    timeoutMs: Number(env.AI_TIMEOUT_MS || 30000),
+    redactContact: (env.AI_REDACT_CONTACT || 'true') === 'true',
+    claude: { baseUrl: env.CLAUDE_BASE_URL || 'https://api.anthropic.com', apiKey: env.CLAUDE_API_KEY || '', model: env.CLAUDE_MODEL || 'claude-haiku-5-5' },
+    ninerouter: { baseUrl: env.NINEROUTER_URL ? `${env.NINEROUTER_URL.replace(/\/$/, '')}/v1` : '', apiKey: env.NINEROUTER_KEY || '', model: env.NINEROUTER_MODEL || '' },
+    freellmapi: { baseUrl: env.FREELLMAPI_URL || 'http://localhost:3001/v1', apiKey: env.FREELLMAPI_KEY || '', model: env.FREELLMAPI_MODEL || 'auto' },
+    fcc: { baseUrl: env.FCC_URL || 'http://127.0.0.1:8082/v1', apiKey: env.FCC_TOKEN || '', model: env.FCC_MODEL || '' },
+    generic: { baseUrl: env.AI_BASE_URL || '', apiKey: env.AI_API_KEY || '', model: env.AI_MODEL || 'auto' },
   },
   whatsapp: {
     token: env.WHATSAPP_TOKEN || '',

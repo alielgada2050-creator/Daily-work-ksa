@@ -206,7 +206,10 @@ const VIEWS = {
     return `<h2>الإعدادات والأسواق</h2><div class="grid">${m.items.map((mk) => `<section class="card"><h3>${esc(mk.name)} (${esc(mk.code)}) ${mk.config.launched ? '<span class="tag ok">مُطلق</span>' : '<span class="tag warn">قيد التجهيز</span>'}</h3>
       ${Object.entries(LBL).filter(([k]) => mk.config[k] !== undefined && k !== 'launched').map(([k, l]) => `<div class="item"><span class="muted">${l}</span><span>${esc(val(mk.config[k])) || '—'}</span></div>`).join('')}</section>`).join('')}
       <section class="card"><h3>حالة الخدمات</h3>${Object.entries(p.providers).map(([k, v]) => `<div class="item"><span>${esc(PROV[k] || k)}</span><span class="tag ${['mock', 'none', 'heuristic', 'local'].includes(v) ? 'warn' : 'ok'}">${esc(v)}</span></div>`).join('')}
-      <p class="muted">لتفعيل خدمة فعلية عدّل متغيرات البيئة كما في README. تعديل إعدادات السوق متاح للإدارة عبر PUT /api/admin/markets/:code.</p></section></div>`;
+      <p class="muted">لتفعيل خدمة فعلية عدّل متغيرات البيئة كما في README. تعديل إعدادات السوق متاح للإدارة عبر PUT /api/admin/markets/:code.</p></section>
+      <section class="card"><h3>سلسلة الذكاء الاصطناعي لتحليل السير</h3><p class="muted">يُجرَّب المزودون بالترتيب، وعند أي فشل أو حد استخدام ينتقل للتالي، وآخرها الاستخراج المحلي. ${p.redactContact ? 'الجوال والبريد يُخفيان قبل الإرسال لأي مزود خارجي.' : 'تنبيه: إخفاء الجوال والبريد معطّل.'}</p>
+      ${p.ai.map((x, i) => `<div class="item"><span>${i + 1}. ${esc(x.label)}</span><span class="tag ${x.configured ? 'ok' : 'warn'}">${x.configured ? 'مهيأ' : 'غير مهيأ — يُتخطى'}</span></div>`).join('')}
+      ${isAdmin() ? '<div class="row"><button class="btn2" data-action="ai-test">اختبار السلسلة بسيرة وهمية</button></div><div id="ai-test-out" class="muted"></div>' : ''}</section></div>`;
   },
 };
 
@@ -286,6 +289,11 @@ const A = {
   channel: (d) => { S.msg.channel = d.ch; S.msg.key = null; render(); },
   send: async () => { const r = await api(`/orders/${S.orderId}/messages`, { json: { channel: S.msg.channel, template: S.msg.template, idempotencyKey: S.msg.key } }); toast(r.duplicate ? 'هذه الدفعة أُرسلت مسبقًا — لم يُكرر الإرسال.' : `الحالة: ${MST[r.message.status] || r.message.status} · ${r.message.recipient_count} مستلمًا.`); render(); },
   refresh: () => render(),
+  'ai-test': async () => {
+    const out = $('#ai-test-out'); out.textContent = 'جارٍ الاختبار…';
+    const r = await api('/admin/ai/test', { json: {} });
+    out.textContent = `أجاب: ${r.provider}` + (r.attempts.length ? ' · ' + r.attempts.map((a) => `${a.provider}: ${a.ok ? `نجح (${a.ms}ms)` : a.error}`).join(' ← ') : ' (لا مزودين في AI_CHAIN — الاستخراج المحلي فقط)');
+  },
   'verify-org': async (d) => { await api(`/admin/orgs/${d.id}/verify`, { json: {} }); toast('سُجّل «تم التحقق يدويًا».'); render(); },
 };
 
